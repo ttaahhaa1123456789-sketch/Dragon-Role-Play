@@ -1039,7 +1039,7 @@
     <section class="server-ip-section">
         <div id="server-ip" onclick="copyIP()">
             <h2>🌐 آیپی سرور</h2>
-            <span id="ip-text">127.0.0.1:7777</span>
+            <span id="ip-text">5.57.35.88:7777 </span>
             <div id="copy-msg">✅ کپی شد</div>
         </div>
     </section>
