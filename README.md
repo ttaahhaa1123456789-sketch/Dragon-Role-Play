@@ -3,1168 +3,1461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRAGON RP | نسل بعدی گیمینگ</title>
-    
-    <!-- فونت‌های خفن -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet">
-    
+    <title>💎 Eternity | پیشرفته‌ترین سرور سمپ</title>
+    <!-- فونت فارسی -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        /* ===== RESET & VARIABLES ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #ff0000;
-            --primary-dark: #990000;
-            --primary-glow: #ff3300;
-            --secondary: #0066ff;
-            --secondary-glow: #0099ff;
-            --accent: #aa00ff;
-            --accent-glow: #cc33ff;
-            --dark: #030014;
-            --darker: #000000;
-            --neon-red: 255, 0, 0;
-            --neon-blue: 0, 102, 255;
-            --neon-purple: 170, 0, 255;
-            
-            /* انیمیشن‌های سه‌بعدی */
-            --perspective: 1000px;
-            --rotation: 5deg;
-        }
-
-        /* ===== BASE STYLES ===== */
         body {
-            font-family: 'Exo 2', 'Rajdhani', 'Orbitron', sans-serif;
+            font-family: 'Vazirmatn', sans-serif;
+            background: #0a0c0f;
             color: #fff;
-            background: var(--darker);
-            overflow-x: hidden;
             line-height: 1.6;
-            min-height: 100vh;
-            position: relative;
+            overflow-x: hidden;
         }
 
-        /* پس زمینه سایبرپانک */
-        body::before {
-            content: '';
+        /* کاستوم اسکرول بار */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1e24;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #fbbf24, #dc2626);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #f59e0b, #b91c1c);
+        }
+
+        /* انیمیشن پس‌زمینه */
+        .cyber-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(125deg, #000000 0%, #0a0015 40%, #15000a 80%, #000000 100%),
-                repeating-linear-gradient(45deg, 
-                    rgba(255, 0, 0, 0.02) 0px, 
-                    rgba(255, 0, 0, 0.02) 2px,
-                    rgba(0, 102, 255, 0.02) 2px, 
-                    rgba(0, 102, 255, 0.02) 4px,
-                    rgba(170, 0, 255, 0.02) 4px,
-                    rgba(170, 0, 255, 0.02) 6px,
-                    transparent 6px,
-                    transparent 12px
-                );
+            background: radial-gradient(circle at 20% 50%, rgba(251, 191, 36, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(220, 38, 38, 0.05) 0%, transparent 50%),
+                        repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 8px);
+            z-index: -1;
             pointer-events: none;
-            z-index: 0;
-            animation: matrix 20s linear infinite;
         }
 
-        @keyframes matrix {
-            0% { background-position: 0 0, 0 0; }
-            100% { background-position: 100% 100%, 100% 100%; }
-        }
-
-        /* ذرات سه‌بعدی */
-        .cyber-particle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            border-radius: 50%;
-            filter: blur(1px);
-            pointer-events: none;
-            z-index: 1;
-            animation: float3D 15s linear infinite;
-            transform-style: preserve-3d;
-        }
-
-        @keyframes float3D {
-            0% {
-                transform: translateZ(-500px) translateY(100vh) translateX(0) rotateX(0deg) rotateY(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateZ(500px) translateY(-100vh) translateX(100px) rotateX(360deg) rotateY(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* خطوط سایبرپانک */
-        .cyber-line {
-            position: fixed;
-            background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--accent), transparent);
-            height: 2px;
-            width: 100%;
-            z-index: 1;
-            animation: scan 8s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { transform: translateY(-50%) translateX(-100%); }
-            100% { transform: translateY(-50%) translateX(100%); }
-        }
-
-        /* ===== PRELOADER ===== */
-        #preloader {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s;
-        }
-
-        .cyber-loader {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            perspective: 1000px;
-        }
-
-        .cube {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform-style: preserve-3d;
-            animation: cubeRotate 5s infinite linear;
-        }
-
-        .cube div {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 3px solid;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 900;
-            font-size: 24px;
-            text-shadow: 0 0 20px currentColor;
-        }
-
-        .cube .front { transform: translateZ(60px); border-color: var(--primary); color: var(--primary); }
-        .cube .back { transform: rotateY(180deg) translateZ(60px); border-color: var(--secondary); color: var(--secondary); }
-        .cube .right { transform: rotateY(90deg) translateZ(60px); border-color: var(--accent); color: var(--accent); }
-        .cube .left { transform: rotateY(-90deg) translateZ(60px); border-color: var(--primary-glow); color: var(--primary-glow); }
-        .cube .top { transform: rotateX(90deg) translateZ(60px); border-color: var(--secondary-glow); color: var(--secondary-glow); }
-        .cube .bottom { transform: rotateX(-90deg) translateZ(60px); border-color: var(--accent-glow); color: var(--accent-glow); }
-
-        @keyframes cubeRotate {
-            from { transform: rotateX(0deg) rotateY(0deg); }
-            to { transform: rotateX(360deg) rotateY(360deg); }
-        }
-
-        /* ===== NAVBAR ===== */
+        /* ناوبری اصلی */
         .navbar {
             position: fixed;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 95%;
+            width: 90%;
             max-width: 1300px;
+            background: rgba(10, 15, 25, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 100px;
+            padding: 0.8rem 1.5rem;
+            z-index: 1000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(251, 191, 36, 0.2);
+            transition: all 0.3s;
+        }
+
+        .navbar.scrolled {
+            background: rgba(5, 8, 15, 0.95);
+            border-color: #fbbf24;
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+        }
+
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 35px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            border: 2px solid transparent;
-            border-radius: 60px;
-            background-clip: padding-box;
-            animation: borderGlow 3s infinite;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
         }
 
-        @keyframes borderGlow {
-            0%, 100% { border-color: var(--primary); box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); }
-            33% { border-color: var(--secondary); box-shadow: 0 0 30px rgba(0, 102, 255, 0.3); }
-            66% { border-color: var(--accent); box-shadow: 0 0 30px rgba(170, 0, 255, 0.3); }
-        }
-
-        .logo {
-            font-size: 32px;
-            font-weight: 900;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 4px;
-            position: relative;
-            animation: logoPulse 2s infinite;
-        }
-
-        @keyframes logoPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .logo::before {
-            content: '⚡';
-            position: absolute;
-            left: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary);
-            text-shadow: 0 0 20px var(--primary);
-            animation: spin 3s linear infinite;
-        }
-
-        .logo::after {
-            content: '⚡';
-            position: absolute;
-            right: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent);
-            text-shadow: 0 0 20px var(--accent);
-            animation: spin 3s linear infinite reverse;
-        }
-
-        .navbar ul {
-            display: flex;
-            gap: 15px;
-            list-style: none;
-        }
-
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            padding: 10px 22px;
-            border-radius: 40px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            font-size: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid transparent;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-        }
-
-        .navbar a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .navbar a:hover::before {
-            left: 100%;
-        }
-
-        .navbar a:hover {
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 0 20px var(--primary), 0 0 40px var(--accent);
-            border-color: #fff;
-        }
-
-        /* لینک شاپ ویژه */
-        .navbar a.shop-link {
-            background: linear-gradient(45deg, #ff0000, #ff0066, #ff00cc);
-            color: #fff;
-            font-weight: 900;
-            border: 2px solid #fff;
-            animation: shopPulse 1.5s infinite;
-            position: relative;
-        }
-
-        @keyframes shopPulse {
-            0%, 100% { 
-                box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0066, 0 0 60px #ff00cc;
-                transform: scale(1);
-            }
-            50% { 
-                box-shadow: 0 0 30px #ff00cc, 0 0 60px #ff0000, 0 0 90px #ff0066;
-                transform: scale(1.05);
-            }
-        }
-
-        /* ===== HAMBURGER MENU ===== */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 8px;
+        /* همبرگر منو در سمت چپ */
+        .hamburger-menu {
             cursor: pointer;
             z-index: 1001;
         }
 
-        .menu-toggle div {
-            width: 35px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 4px;
-            transition: all 0.3s;
-            box-shadow: 0 0 10px var(--primary);
-        }
-
-        .menu-toggle.active div:nth-child(1) {
-            transform: rotate(45deg) translate(10px, 10px);
-            background: var(--secondary);
-        }
-
-        .menu-toggle.active div:nth-child(2) {
-            opacity: 0;
-            transform: translateX(-20px);
-        }
-
-        .menu-toggle.active div:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-            background: var(--accent);
-        }
-
-        @media (max-width: 1000px) {
-            .navbar ul {
-                display: none;
-                flex-direction: column;
-                background: rgba(0, 0, 0, 0.95);
-                backdrop-filter: blur(20px);
-                position: absolute;
-                top: 80px;
-                left: 20px;
-                right: 20px;
-                padding: 25px;
-                border-radius: 40px;
-                border: 2px solid var(--primary);
-                box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
-            }
-
-            .navbar ul.show {
-                display: flex;
-                animation: slideDown 0.3s ease;
-            }
-
-            @keyframes slideDown {
-                from {
-                    opacity: 0;
-                    transform: translateY(-30px) scale(0.9);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0) scale(1);
-                }
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            min-height: 100vh;
+        .hamburger-icon {
+            width: 30px;
+            height: 20px;
+            position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-            perspective: 1000px;
+            justify-content: space-between;
         }
 
-        .hero h1 {
-            font-size: clamp(60px, 12vw, 120px);
+        .hamburger-icon span {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #fbbf24, #ef4444);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .hamburger-icon.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-icon.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-icon.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* لوگو در وسط */
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 15px #fbbf24);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo-text {
+            font-size: 1.6rem;
             font-weight: 900;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            background: linear-gradient(45deg, 
-                var(--primary), 
-                var(--secondary), 
-                var(--accent), 
-                var(--primary-glow), 
-                var(--secondary-glow)
-            );
+            background: linear-gradient(135deg, #fbbf24, #ef4444, #fbbf24);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 
-                0 0 30px rgba(255, 0, 0, 0.7),
-                0 0 60px rgba(0, 102, 255, 0.5),
-                0 0 90px rgba(170, 0, 255, 0.3);
-            margin-bottom: 20px;
-            letter-spacing: 8px;
-            animation: titleRotate 5s infinite;
-            transform-style: preserve-3d;
+            animation: gradient 3s ease infinite;
         }
 
-        @keyframes titleRotate {
-            0%, 100% { transform: rotateX(0deg) rotateY(0deg); }
-            25% { transform: rotateX(5deg) rotateY(-5deg); }
-            75% { transform: rotateX(-5deg) rotateY(5deg); }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .hero h2 {
-            font-size: clamp(24px, 5vw, 32px);
-            margin-bottom: 40px;
-            color: transparent;
-            background: linear-gradient(135deg, #fff, #ccc);
-            -webkit-background-clip: text;
-            position: relative;
-        }
-
-        #typing {
-            color: #fff;
-            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
-            border-left: 4px solid var(--primary);
-            padding-left: 20px;
-            margin-left: 20px;
-        }
-
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #ff0000;
-            animation: glitch-1 2s infinite linear alternate-reverse;
-        }
-
-        .glitch::after {
-            left: -2px;
-            text-shadow: 2px 0 #0000ff;
-            animation: glitch-2 2s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-1 {
-            0% { clip-path: inset(20% 0 30% 0); }
-            20% { clip-path: inset(60% 0 10% 0); }
-            40% { clip-path: inset(10% 0 80% 0); }
-            60% { clip-path: inset(40% 0 50% 0); }
-            80% { clip-path: inset(90% 0 5% 0); }
-            100% { clip-path: inset(15% 0 70% 0); }
-        }
-
-        @keyframes glitch-2 {
-            0% { clip-path: inset(30% 0 20% 0); }
-            20% { clip-path: inset(80% 0 10% 0); }
-            40% { clip-path: inset(5% 0 60% 0); }
-            60% { clip-path: inset(20% 0 40% 0); }
-            80% { clip-path: inset(50% 0 30% 0); }
-            100% { clip-path: inset(70% 0 15% 0); }
-        }
-
-        .hero .btn {
-            display: inline-block;
-            padding: 20px 60px;
-            background: linear-gradient(45deg, #ff0000, #ff6600, #ff00ff);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 60px;
-            font-weight: 900;
-            font-size: 22px;
-            border: 3px solid #fff;
-            box-shadow: 0 0 30px #ff0000, 0 0 60px #ff00ff;
-            transition: all 0.3s;
+        /* آیپی لوزی شکل در سمت راست */
+        .ip-diamond {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fbbf24, #dc2626);
+            transform: rotate(45deg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
             position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            transform-style: preserve-3d;
-            animation: btnFloat 3s infinite;
         }
 
-        @keyframes btnFloat {
-            0%, 100% { transform: translateZ(0) scale(1); }
-            50% { transform: translateZ(20px) scale(1.05); }
+        .ip-diamond:hover {
+            transform: rotate(45deg) scale(1.1);
+            box-shadow: 0 0 50px #fbbf24;
         }
 
-        .hero .btn:hover {
-            transform: translateZ(40px) scale(1.1);
-            box-shadow: 0 0 40px #ff0000, 0 0 80px #ff00ff, 0 0 120px #0000ff;
+        .ip-diamond i {
+            transform: rotate(-45deg);
+            font-size: 1.8rem;
+            color: #0a0c0f;
         }
 
-        /* ===== SECTIONS ===== */
-        .section {
-            padding: 120px 20px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            perspective: 1000px;
-        }
-
-        .section::before {
-            content: '';
+        .ip-diamond .copy-notification {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(45deg, 
-                rgba(255, 0, 0, 0.02) 0px,
-                rgba(255, 0, 0, 0.02) 20px,
-                rgba(0, 102, 255, 0.02) 20px,
-                rgba(0, 102, 255, 0.02) 40px,
-                rgba(170, 0, 255, 0.02) 40px,
-                rgba(170, 0, 255, 0.02) 60px
-            );
+            top: -40px;
+            right: 50%;
+            transform: translateX(50%);
+            background: #fbbf24;
+            color: #0a0c0f;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transition: 0.3s;
             pointer-events: none;
         }
 
-        .section h2 {
-            font-size: 56px;
-            font-weight: 900;
-            margin-bottom: 70px;
-            position: relative;
-            display: inline-block;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #fff, #ff0000, #0066ff, #aa00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-            animation: sectionTitle 4s infinite;
-            transform-style: preserve-3d;
-        }
-
-        @keyframes sectionTitle {
-            0%, 100% { transform: rotateY(0deg) scale(1); }
-            50% { transform: rotateY(10deg) scale(1.1); }
-        }
-
-        .section h2::before,
-        .section h2::after {
-            content: '⚡';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 40px;
-            animation: spark 1.5s infinite;
-        }
-
-        .section h2::before {
-            left: -70px;
-            color: var(--primary);
-            text-shadow: 0 0 20px var(--primary);
-        }
-
-        .section h2::after {
-            right: -70px;
-            color: var(--accent);
-            text-shadow: 0 0 20px var(--accent);
-        }
-
-        @keyframes spark {
-            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
-            50% { opacity: 0.5; transform: translateY(-50%) scale(1.5); }
-        }
-
-        /* ===== CARDS ===== */
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-            perspective: 1000px;
-        }
-
-        .card {
-            padding: 40px 30px;
-            border-radius: 50px;
-            width: 280px;
-            font-weight: 700;
-            font-size: 18px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            border: 2px solid transparent;
-            transition: all 0.4s;
-            cursor: default;
-            position: relative;
-            overflow: hidden;
-            transform-style: preserve-3d;
-            animation: cardFloat 6s infinite;
-        }
-
-        .card:nth-child(1) { animation-delay: 0s; }
-        .card:nth-child(2) { animation-delay: 1s; }
-        .card:nth-child(3) { animation-delay: 2s; }
-        .card:nth-child(4) { animation-delay: 3s; }
-
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0) rotateX(0deg); }
-            50% { transform: translateY(-20px) rotateX(5deg); }
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, 
-                var(--primary), 
-                var(--secondary), 
-                var(--accent), 
-                var(--primary-glow), 
-                var(--secondary-glow)
-            );
-            border-radius: 50px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s;
-            animation: borderRotate 3s linear infinite;
-        }
-
-        @keyframes borderRotate {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
-
-        .card:hover::before {
+        .ip-diamond:hover .copy-notification {
             opacity: 1;
+            top: -50px;
         }
 
-        .card:hover {
-            transform: translateY(-30px) scale(1.05) rotateX(10deg);
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+        /* منوی موبایل */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: rgba(10, 15, 25, 0.95);
+            backdrop-filter: blur(20px);
+            border-left: 2px solid #fbbf24;
+            z-index: 999;
+            transition: 0.5s;
+            padding: 100px 30px 30px;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
 
-        .card.owner {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(255, 215, 0, 0.2));
+        .mobile-menu.active {
+            right: 0;
         }
 
-        .card.scripter {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 255, 0, 0.2));
+        .mobile-menu ul {
+            list-style: none;
         }
 
-        /* ===== GALLERY ===== */
-        .gallery-wrapper {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 20px;
-            perspective: 1000px;
+        .mobile-menu li {
+            margin-bottom: 20px;
         }
 
-        .gallery-scroll {
-            width: 100%;
-            border-radius: 50px;
-            overflow: hidden;
-            cursor: pointer;
-            position: relative;
-            border: 4px solid transparent;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.5);
-            transition: all 0.4s;
-            transform-style: preserve-3d;
-            animation: galleryFloat 8s infinite;
-        }
-
-        @keyframes galleryFloat {
-            0%, 100% { transform: rotateY(0deg) rotateX(0deg); }
-            25% { transform: rotateY(5deg) rotateX(2deg); }
-            75% { transform: rotateY(-5deg) rotateX(-2deg); }
-        }
-
-        .gallery-scroll:hover {
-            transform: scale(1.02) rotateY(2deg);
-            border-color: var(--primary);
-            box-shadow: 0 0 60px var(--primary), 0 0 100px var(--accent);
-        }
-
-        #slider-img {
-            width: 100%;
-            height: auto;
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
             display: block;
-            transition: opacity 0.5s ease;
+            padding: 10px;
+            border-radius: 10px;
+            transition: 0.3s;
         }
 
-        .gallery-dots {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
+        .mobile-menu a:hover,
+        .mobile-menu a.active {
+            background: linear-gradient(135deg, #fbbf24, #dc2626);
+            color: #0a0c0f;
+            padding-right: 20px;
         }
 
-        .dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 10px var(--primary);
-            animation: dotPulse 2s infinite;
-        }
-
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.5s; }
-        .dot:nth-child(3) { animation-delay: 1s; }
-        .dot:nth-child(4) { animation-delay: 1.5s; }
-
-        @keyframes dotPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); background: var(--primary); }
-        }
-
-        .dot.active {
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            box-shadow: 0 0 20px var(--primary), 0 0 40px var(--accent);
-            transform: scale(1.4);
-        }
-
-        /* ===== LIGHTBOX ===== */
-        #lightbox {
+        .menu-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(20px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            cursor: pointer;
-        }
-
-        #lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 50px;
-            border: 4px solid transparent;
-            box-shadow: 0 0 60px var(--primary), 0 0 120px var(--accent);
-            animation: lightboxZoom 0.3s ease;
-        }
-
-        @keyframes lightboxZoom {
-            from {
-                opacity: 0;
-                transform: scale(0.5) rotate(-10deg);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-        }
-
-        /* ===== SERVER IP ===== */
-        .server-ip-section {
-            padding: 100px 20px;
-            perspective: 1000px;
-        }
-
-        #server-ip {
-            cursor: pointer;
-            padding: 50px 100px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            border: 4px solid transparent;
-            border-radius: 100px;
-            display: inline-block;
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
-            position: relative;
-            transition: all 0.4s;
-            transform-style: preserve-3d;
-            animation: ipFloat 5s infinite;
-        }
-
-        @keyframes ipFloat {
-            0%, 100% { transform: translateZ(0) rotateY(0deg); }
-            50% { transform: translateZ(30px) rotateY(5deg); }
-        }
-
-        #server-ip:hover {
-            transform: translateZ(50px) scale(1.05);
-            border-color: var(--primary);
-            box-shadow: 0 0 70px var(--primary), 0 0 140px var(--accent);
-        }
-
-        #server-ip h2 {
-            color: #fff;
-            margin-bottom: 25px;
-            font-size: 36px;
-            text-shadow: 0 0 20px var(--primary), 0 0 40px var(--secondary);
-            letter-spacing: 3px;
-        }
-
-        #ip-text {
-            font-size: 56px;
-            font-weight: 900;
-            background: linear-gradient(45deg, #ff0000, #0066ff, #aa00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-            letter-spacing: 6px;
-            font-family: 'Orbitron', monospace;
-        }
-
-        #copy-msg {
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            color: #fff;
-            padding: 10px 40px;
-            border-radius: 50px;
-            font-weight: 700;
+            background: rgba(0,0,0,0.7);
+            z-index: 998;
             opacity: 0;
-            transition: opacity 0.3s;
-            white-space: nowrap;
-            border: 2px solid #fff;
-            font-size: 18px;
+            visibility: hidden;
+            transition: 0.3s;
         }
 
-        /* ===== FOOTER ===== */
-        footer {
-            background: linear-gradient(135deg, #000, #0a000a, #000a0a);
-            padding: 50px;
-            text-align: center;
-            font-weight: 700;
-            color: #fff;
-            border-top: 3px solid transparent;
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* محتوای اصلی */
+        .main {
+            margin-top: 120px;
+        }
+
+        /* بخش‌ها */
+        section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
             position: relative;
-            z-index: 2;
-            animation: footerGlow 4s infinite;
-            font-size: 20px;
         }
 
-        @keyframes footerGlow {
-            0%, 100% { border-color: var(--primary); box-shadow: 0 -5px 30px rgba(255, 0, 0, 0.5); }
-            33% { border-color: var(--secondary); box-shadow: 0 -5px 30px rgba(0, 102, 255, 0.5); }
-            66% { border-color: var(--accent); box-shadow: 0 -5px 30px rgba(170, 0, 255, 0.5); }
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
         }
 
-        footer p {
-            font-size: 20px;
-            text-shadow: 0 0 15px currentColor;
+        .section-subtitle {
+            color: #fbbf24;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
         }
 
-        footer span {
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #fbbf24);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #fbbf24, #ef4444, #fbbf24);
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+
+        /* بخش خانه */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid #fbbf24;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
             font-weight: 900;
-            font-size: 22px;
+            line-height: 1.1;
+            margin-bottom: 20px;
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .section h2 {
-                font-size: 40px;
-            }
-
-            .section h2::before,
-            .section h2::after {
-                display: none;
-            }
-
-            #server-ip {
-                padding: 30px 50px;
-            }
-
-            #ip-text {
-                font-size: 32px;
-                letter-spacing: 3px;
-            }
-
-            .card {
-                width: 100%;
-                max-width: 350px;
-            }
+        .hero-title span {
+            background: linear-gradient(135deg, #fbbf24, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            animation: glow 3s ease-in-out infinite;
         }
 
-        @media (max-width: 480px) {
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px #fbbf24); }
+            50% { filter: drop-shadow(0 0 40px #ef4444); }
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* فقط تعداد پلیر در وسط */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fbbf24, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: #fbbf24;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #fbbf24, #dc2626);
+            border: none;
+            color: #0a0c0f;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #fbbf24;
+            color: #fff;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-outline:hover {
+            background: #fbbf24;
+            color: #0a0c0f;
+            box-shadow: 0 0 30px #fbbf24;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 50px rgba(251, 191, 36, 0.3));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* گالری تصاویر */
+        .gallery-section {
+            background: linear-gradient(135deg, rgba(10, 15, 25, 0.9), rgba(20, 10, 20, 0.9));
+            border-radius: 30px;
+            padding: 40px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(10px);
+            margin: 40px auto;
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: #fff;
+            padding: 30px 20px 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .gallery-caption span {
+            color: #fbbf24;
+            font-size: 1rem;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .gallery-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .gallery-dot.active {
+            background: #fbbf24;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px #fbbf24;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(251, 191, 36, 0.3);
+            border: 1px solid #fbbf24;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        .gallery-nav:hover {
+            background: #fbbf24;
+            color: #0a0c0f;
+        }
+
+        .gallery-nav.prev {
+            left: 20px;
+        }
+
+        .gallery-nav.next {
+            right: 20px;
+        }
+
+        .gallery-nav i {
+            font-size: 1.5rem;
+        }
+
+        /* بخش مدیریت */
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .management-card {
+            background: rgba(20, 25, 40, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .management-card:hover {
+            transform: translateY(-10px);
+            border-color: #fbbf24;
+            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.3);
+        }
+
+        .management-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(251, 191, 36, 0.2), transparent 70%);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .management-card:hover::before {
+            opacity: 1;
+        }
+
+        .management-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #fbbf24, #dc2626);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: #0a0c0f;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .management-role {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        .management-name {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .management-badge {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid #fbbf24;
+            color: #fbbf24;
+            padding: 0.3rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+
+        .double-scripters {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .scripter-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 10px;
+            flex: 1;
+        }
+
+        .scripter-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        .scripter-title {
+            font-size: 0.8rem;
+            color: #a0a0a0;
+        }
+
+        /* بخش درباره سرور (بیشتر بدانید) */
+        .about-server {
+            background: linear-gradient(135deg, rgba(10, 15, 25, 0.9), rgba(20, 10, 20, 0.9));
+            border-radius: 30px;
+            padding: 50px;
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            backdrop-filter: blur(10px);
+            margin: 40px auto;
+        }
+
+        /* انیمیشن شناور برای دایره عکس */
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.02); }
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .about-card {
+            background: rgba(20, 25, 40, 0.5);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            transition: 0.3s;
+        }
+
+        .about-card:hover {
+            border-color: #fbbf24;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+        }
+
+        .about-card i {
+            font-size: 2.5rem;
+            color: #fbbf24;
+            margin-bottom: 20px;
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fbbf24;
+        }
+
+        .about-card p {
+            color: #a0a0a0;
+            line-height: 1.8;
+        }
+
+        .about-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .about-stat {
+            text-align: center;
+        }
+
+        .about-stat .number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fbbf24;
+        }
+
+        .about-stat .label {
+            color: #a0a0a0;
+            font-size: 1rem;
+        }
+
+        /* فوتر */
+        footer {
+            background: rgba(5, 8, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(251, 191, 36, 0.2);
+            padding: 60px 5% 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #fbbf24;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fbbf24;
+            padding-right: 10px;
+        }
+
+        /* آیپی فوتر به صورت رنک */
+        .footer-ip-card {
+            background: rgba(20, 25, 40, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .footer-ip-card:hover {
+            border-color: #fbbf24;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2);
+        }
+
+        .footer-ip-card i {
+            font-size: 2rem;
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        .footer-ip-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fbbf24;
+            direction: ltr;
+            margin: 10px 0;
+        }
+
+        .footer-ip-label {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #a0a0a0;
+        }
+
+        /* دکمه بازگشت به بالا */
+        .go-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #fbbf24, #dc2626);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0c0f;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .go-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .go-top:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 10px 30px #fbbf24;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 968px) {
             .navbar {
-                padding: 12px 20px;
+                width: 95%;
+                border-radius: 20px;
             }
-
-            .logo {
-                font-size: 24px;
+            
+            .nav-container {
+                flex-direction: row;
+                gap: 15px;
             }
-
-            .logo::before,
-            .logo::after {
-                display: none;
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
             }
-
-            #ip-text {
-                font-size: 24px;
+            
+            .hero-buttons {
+                justify-content: center;
             }
-
-            .btn {
-                padding: 15px 40px;
-                font-size: 18px;
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .gallery-slide img {
+                height: 300px;
+            }
+            
+            .about-stats {
+                flex-direction: column;
+                gap: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="cyber-bg"></div>
 
-    <!-- ذرات سایبرپانک -->
-    <script>
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'cyber-particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 10 + 's';
-            particle.style.width = Math.random() * 6 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            document.body.appendChild(particle);
-        }
+    <!-- ناوبری -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- همبرگر منو در سمت چپ -->
+            <div class="hamburger-menu" onclick="toggleMenu()">
+                <div class="hamburger-icon" id="hamburgerIcon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
 
-        for (let i = 0; i < 5; i++) {
-            const line = document.createElement('div');
-            line.className = 'cyber-line';
-            line.style.top = Math.random() * 100 + '%';
-            line.style.animationDelay = Math.random() * 5 + 's';
-            document.body.appendChild(line);
-        }
-    </script>
+            <!-- لوگو در وسط -->
+            <div class="logo">
+                <i class="fas fa-crown logo-icon"></i>
+                <span class="logo-text">ETERNITY</span>
+            </div>
 
-    <!-- ===== PRELOADER ===== -->
-    <div id="preloader">
-        <div class="cyber-loader">
-            <div class="cube">
-                <div class="front">D</div>
-                <div class="back">R</div>
-                <div class="right">P</div>
-                <div class="left">⚡</div>
-                <div class="top">🐉</div>
-                <div class="bottom">🔥</div>
+            <!-- آیپی لوزی شکل در سمت راست با کپی خودکار -->
+            <div class="ip-diamond" onclick="copyIP()">
+                <i class="fas fa-copy"></i>
+                <span class="copy-notification">کپی آیپی</span>
             </div>
         </div>
-    </div>
-
-    <!-- ===== NAVBAR ===== -->
-    <nav class="navbar">
-        <div class="logo">DRAGON RP</div>
-        <div class="menu-toggle" id="menu-toggle">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <ul id="nav-links">
-            <li><a href="#home" class="glitch" data-text="خانه">🏠 خانه</a></li>
-            <li><a href="#features" class="glitch" data-text="ویژگی‌ها">✨ ویژگی‌ها</a></li>
-            <li><a href="#team" class="glitch" data-text="تیم">👥 تیم</a></li>
-            <li><a href="#gallery" class="glitch" data-text="گالری">📸 گالری</a></li>
-            <li><a href="#server-ip" class="glitch" data-text="آیپی">🌐 آیپی</a></li>
-            <li><a href="https://ttaahhaa1123456789-sketch.github.io/DragonRp-Shop/" target="_blank" class="shop-link">⚡ فروشگاه ویژه ⚡</a></li>
-            <li><a href="https://ttaahhaa1123456789-sketch.github.io/Dragon-Rp-Froum-/" target="_blank" class="glitch" data-text="انجمن">📋 انجمن</a></li>
-        </ul>
     </nav>
 
-    <!-- ===== HERO SECTION ===== -->
-    <section id="home" class="hero">
-        <h1 class="glitch" data-text="DRAGON RP">DRAGON RP</h1>
-        <h2><span id="typing"></span></h2>
-        <a href="mtasa://127.0.0.1:22003" class="btn">🎮 ورود به بازی</a>
-    </section>
-
-    <!-- ===== FEATURES SECTION ===== -->
-    <section id="features" class="section">
-        <h2 class="glitch" data-text="ویژگی‌های سرور">ویژگی‌های سرور</h2>
-        <div class="cards">
-            <div class="card">🚓 سیستم پلیس پیشرفته</div>
-            <div class="card">🏢 گتو و مافیای قدرتمند</div>
-            <div class="card">💰 اقتصاد پویا</div>
-            <div class="card">🏎 ماشین‌های سوپراسپرت</div>
-        </div>
-    </section>
-
-    <!-- ===== TEAM SECTION ===== -->
-    <section id="team" class="section">
-        <h2 class="glitch" data-text="تیم مدیریت">تیم مدیریت</h2>
-        <div class="cards">
-            <div class="card owner">👑 Owner: <span style="color: #ffaa00; text-shadow: 0 0 20px #ffaa00;">Mr_Taha</span></div>
-            <div class="card scripter">⚡ Scripter: <span style="color: #00ff00; text-shadow: 0 0 20px #00ff00;">Kurdx</span></div>
-        </div>
-    </section>
-
-    <!-- ===== GALLERY SECTION ===== -->
-    <section id="gallery" class="section">
-        <h2 class="glitch" data-text="گالری تصاویر">گالری تصاویر</h2>
-        <div class="gallery-wrapper">
-            <div class="gallery-scroll">
-                <img id="slider-img" src="https://uploadkon.ir/uploads/418017_26IMG-20250907-151918-804.png" alt="Gallery Image">
-            </div>
-            <div class="gallery-dots" id="gallery-dots"></div>
-        </div>
-    </section>
-
-    <!-- ===== LIGHTBOX ===== -->
-    <div id="lightbox">
-        <img src="" alt="Expanded Image">
+    <!-- منوی موبایل (با آیتم قوانین اضافه شده) -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home" onclick="toggleMenu()">خانه</a></li>
+            <li><a href="#gallery" onclick="toggleMenu()">گالری</a></li>
+            <li><a href="#features" onclick="toggleMenu()">ویژگی‌ها</a></li>
+            <li><a href="#about" onclick="toggleMenu()">درباره سرور</a></li>
+            <li><a href="#management" onclick="toggleMenu()">مدیریت</a></li>
+            <!-- آیتم قوانین با لینک خارجی -->
+            <li><a href="https://ttaahhaa1123456789-sketch.github.io/Gvanin-Eternity-/" target="_blank" onclick="toggleMenu()">📜 قوانین</a></li>
+        </ul>
     </div>
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
-    <!-- ===== SERVER IP SECTION ===== -->
-    <section class="server-ip-section">
-        <div id="server-ip" onclick="copyIP()">
-            <h2>🌐 آیپی سرور</h2>
-            <span id="ip-text">5.57.35.88:7777 </span>
-            <div id="copy-msg">✅ کپی شد</div>
-        </div>
-    </section>
+    <!-- محتوای اصلی -->
+    <main class="main">
+        <!-- خانه -->
+        <section id="home">
+            <div class="hero">
+                <div class="hero-content" data-aos="fade-left">
+                    <span class="hero-badge"><i class="fas fa-bolt"></i> برترین سرور سمپ 2025</span>
+                    <h1 class="hero-title">
+                        تجربه <span>جدید</span><br>
+                        در Eternity
+                    </h1>
+                    <p class="hero-desc">به پیشرفته‌ترین سرور سمپ خوش آمدید. با بیش از 50 بازیکن فعال، ایونت‌های روزانه و مدیریت حرفه‌ای</p>
+                    
+                    <!-- فقط تعداد پلیر -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">۵۰+</span>
+                            <span class="stat-label">بازیکن آنلاین</span>
+                        </div>
+                    </div>
 
-    <!-- ===== FOOTER ===== -->
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="copyIP()"><i class="fas fa-play"></i> هم‌اکنون وارد شو</button>
+                        <button class="btn-outline" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})"><i class="fas fa-info-circle"></i> بیشتر بدانید</button>
+                    </div>
+                </div>
+                <div class="hero-image" data-aos="fade-right">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M100 0 L200 100 L100 200 L0 100 Z' fill='%23fbbf24' opacity='0.1'/%3E%3Ccircle cx='100' cy='100' r='80' fill='none' stroke='%23fbbf24' stroke-width='2' stroke-dasharray='10 10'/%3E%3C/svg%3E" alt="hero">
+                </div>
+            </div>
+        </section>
+
+        <!-- گالری تصاویر -->
+        <section id="gallery">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">تصاویر سرور</div>
+                <h2 class="section-title">گالری Eternity</h2>
+            </div>
+
+            <div class="gallery-section" data-aos="fade-up">
+                <div class="gallery-container">
+                    <div class="gallery-slider" id="gallerySlider">
+                        <!-- اسلاید 1 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/1a1e2a/fbbf24?text=Eternity+Server+1" alt="گالری 1">
+                            <div class="gallery-caption">
+                                نقشه اختصاصی لاس ونتوراس
+                                <span>جدیدترین مپ 2025</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 2 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/2a1e1a/fbbf24?text=Eternity+Server+2" alt="گالری 2">
+                            <div class="gallery-caption">
+                                ایونت شبانه ۵۰ نفره
+                                <span>مسابقات جایزه دار</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 3 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/1e2a1a/fbbf24?text=Eternity+Server+3" alt="گالری 3">
+                            <div class="gallery-caption">
+                                ساختمان دولت مرکزی
+                                <span>سرور نقش بازی</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 4 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/2a1a2a/fbbf24?text=Eternity+Server+4" alt="گالری 4">
+                            <div class="gallery-caption">
+                                کلن وار هفتگی
+                                <span>جنگ کلن ها</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 5 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/1a2a2a/fbbf24?text=Eternity+Server+5" alt="گالری 5">
+                            <div class="gallery-caption">
+                                ماشین های اختصاصی
+                                <span>بیش از ۱۰۰ مدل</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 6 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/2a2a1a/fbbf24?text=Eternity+Server+6" alt="گالری 6">
+                            <div class="gallery-caption">
+                                جزیره تفریحی
+                                <span>منطقه ویژه VIP</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 7 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/1a1a2a/fbbf24?text=Eternity+Server+7" alt="گالری 7">
+                            <div class="gallery-caption">
+                                سیستم مشاغل
+                                <span>۱۵ شغل مختلف</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 8 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/2a1a1a/fbbf24?text=Eternity+Server+8" alt="گالری 8">
+                            <div class="gallery-caption">
+                                کازینو و قمارخانه
+                                <span>برنده جایزه میلیونی</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 9 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/1a2a1a/fbbf24?text=Eternity+Server+9" alt="گالری 9">
+                            <div class="gallery-caption">
+                                فرودگاه بین المللی
+                                <span>نقشه اختصاصی</span>
+                            </div>
+                        </div>
+                        <!-- اسلاید 10 -->
+                        <div class="gallery-slide">
+                            <img src="https://via.placeholder.com/1000x500/2a2a2a/fbbf24?text=Eternity+Server+10" alt="گالری 10">
+                            <div class="gallery-caption">
+                                شب نشینی بازیکنان
+                                <span>کامیونیتی فعال</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- دکمه‌های ناوبری -->
+                    <div class="gallery-nav prev" onclick="prevSlide()">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                    <div class="gallery-nav next" onclick="nextSlide()">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+                
+                <!-- دکمه‌های پایین اسلایدر -->
+                <div class="gallery-dots" id="galleryDots">
+                    <!-- با جاوااسکریپت ساخته می‌شود -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ویژگی‌ها -->
+        <section id="features">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">چرا ما؟</div>
+                <h2 class="section-title">ویژگی‌های منحصر به فرد</h2>
+            </div>
+
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div class="feature-card" data-aos="flip-right" data-aos-delay="100">
+                    <i class="fas fa-rocket" style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"></i>
+                    <h3>سرعت فوق‌العاده</h3>
+                    <p>بهترین سخت‌افزار با پهنای باند ۱۰ گیگابایت برای تجربه بازی بدون لگ و تاخیر</p>
+                </div>
+
+                <div class="feature-card" data-aos="flip-right" data-aos-delay="200">
+                    <i class="fas fa-shield-halved" style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"></i>
+                    <h3>آنتی‌چیت پیشرفته</h3>
+                    <p>سیستم هوشمند تشخیص تقلب با دقت ۹۹.۹٪ و بن دائمی متقلبان</p>
+                </div>
+
+                <div class="feature-card" data-aos="flip-right" data-aos-delay="300">
+                    <i class="fas fa-map" style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"></i>
+                    <h3>۲۰۰+ مپ اختصاصی</h3>
+                    <p>تعداد بیشمار مپ جدید و انحصاری با آپدیت‌های هفتگی</p>
+                </div>
+
+                <div class="feature-card" data-aos="flip-right" data-aos-delay="400">
+                    <i class="fas fa-gift" style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"></i>
+                    <h3>جایزه‌های میلیونی</h3>
+                    <p>مسابقات روزانه با جوایز نقدی و آیتم‌های کمیاب</p>
+                </div>
+
+                <div class="feature-card" data-aos="flip-right" data-aos-delay="500">
+                    <i class="fas fa-headset" style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"></i>
+                    <h3>پشتیبانی ۲۴/۷</h3>
+                    <p>تیم پشتیبانی حرفه‌ای آماده پاسخگویی در تمام ساعات شبانه‌روز</p>
+                </div>
+
+                <div class="feature-card" data-aos="flip-right" data-aos-delay="600">
+                    <i class="fas fa-robot" style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"></i>
+                    <h3>سیستم‌های هوشمند</h3>
+                    <p>پیشرفته‌ترین سیستم‌های مینی‌گیم، مشاغل و کلن‌ها</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- درباره سرور (بیشتر بدانید) -->
+        <section id="about">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">درباره سرور Eternity</div>
+                <h2 class="section-title">بیشتر بدانید</h2>
+            </div>
+
+            <div class="about-server" data-aos="fade-up">
+                <!-- دایره عکس اضافه شده -->
+                <div style="
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    border: 4px solid #fbbf24;
+                    box-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
+                    margin: 0 auto 40px auto;
+                    transition: transform 0.4s ease, box-shadow 0.4s ease;
+                    cursor: pointer;
+                    animation: floatImage 4s ease-in-out infinite;">
+                    <img src="https://uploadkon.ir/uploads/46d126_26file-00000000853471fdb1b85cd2d888a071.png" alt="نماد سرور Eternity" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-history"></i>
+                        <h3>تاریخچه سرور</h3>
+                        <p>سرور Eternity از سال ۱۴۰۲ فعالیت خود را آغاز کرده و با تلاش تیم مدیریتی به یکی از پیشرفته‌ترین سرورهای سمپ تبدیل شده است.</p>
+                    </div>
+                    <div class="about-card" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fas fa-trophy"></i>
+                        <h3>افتخارات</h3>
+                        <p>برترین سرور نقش‌بازی سال ۱۴۰۳ - بهترین کامیونیتی فعال - بیش از ۱۰۰۰ عضو فعال در دیسکورد</p>
+                    </div>
+                    <div class="about-card" data-aos="fade-up" data-aos-delay="300">
+                        <i class="fas fa-users"></i>
+                        <h3>کامیونیتی</h3>
+                        <p>با بیش از ۵۰ بازیکن آنلاین در ساعات پیک و ۲۰۰۰+ عضو در شبکه‌های اجتماعی</p>
+                    </div>
+                    <div class="about-card" data-aos="fade-up" data-aos-delay="400">
+                        <i class="fas fa-code"></i>
+                        <h3>توسعه و نوآوری</h3>
+                        <p>تیم برنامه‌نویسی حرفه‌ای ما به صورت مداوم در حال توسعه سیستم‌های جدید و بهبود سرور است. هر ماه شاهد آپدیت‌های بزرگ با امکانات جدید و مپ‌های اختصاصی باشید.</p>
+                    </div>
+                </div>
+
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <div class="number">۲+</div>
+                        <div class="label">سال سابقه</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="number">۵۰+</div>
+                        <div class="label">بازیکن آنلاین</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="number">۱۰۰+</div>
+                        <div class="label">ایونت برگزار شده</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="number">۵۰+</div>
+                        <div class="label">مپ اختصاصی</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش مدیریت -->
+        <section id="management">
+            <div class="section-header" data-aos="fade-up">
+                <div class="section-subtitle">تیم رهبری</div>
+                <h2 class="section-title">مدیریت ارشد Eternity</h2>
+            </div>
+
+            <div class="management-grid">
+                <!-- Owner -->
+                <div class="management-card" data-aos="flip-right" data-aos-delay="100">
+                    <div class="management-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="management-role">صاحب سرور (Owner)</div>
+                    <div class="management-name">Taha</div>
+                    <span class="management-badge">بنیان‌گذار</span>
+                </div>
+
+                <!-- Founder -->
+                <div class="management-card" data-aos="flip-right" data-aos-delay="200">
+                    <div class="management-icon">
+                        <i class="fas fa-hand-fist"></i>
+                    </div>
+                    <div class="management-role">بنیان‌گذار (Founder)</div>
+                    <div class="management-name">Daryl_Dixon</div>
+                    <span class="management-badge">هم بنیان‌گذار</span>
+                </div>
+
+                <!-- Scripter (دو نفره) -->
+                <div class="management-card" data-aos="flip-right" data-aos-delay="300">
+                    <div class="management-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="management-role">تیم اسکریپت (Scripter)</div>
+                    <div class="double-scripters">
+                        <div class="scripter-item">
+                            <div class="scripter-name">Kurdx</div>
+                            <div class="scripter-title">توسعه‌دهنده ارشد</div>
+                        </div>
+                        <div class="scripter-item">
+                            <div class="scripter-name">BeNy</div>
+                            <div class="scripter-title">توسعه‌دهنده سیستم</div>
+                        </div>
+                    </div>
+                    <span class="management-badge">۲ نفره حرفه‌ای</span>
+                </div>
+
+                <!-- Head Ghetto -->
+                <div class="management-card" data-aos="flip-right" data-aos-delay="400">
+                    <div class="management-icon">
+                        <i class="fas fa-street-view"></i>
+                    </div>
+                    <div class="management-role">هد گتو (Head Ghetto)</div>
+                    <div class="management-name">Abolfazl_Ofog</div>
+                    <span class="management-badge">مدیر گتوها</span>
+                </div>
+
+                <!-- Head Dolat -->
+                <div class="management-card" data-aos="flip-right" data-aos-delay="500">
+                    <div class="management-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="management-role">هد دولت (Head Dolat)</div>
+                    <div class="management-name">Amir_Viking</div>
+                    <span class="management-badge">مدیر سیستم دولت</span>
+                </div>
+
+                <!-- روابط عمومی و تولید محتوا -->
+                <div class="management-card" data-aos="flip-right" data-aos-delay="600">
+                    <div class="management-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="management-role">روابط عمومی و تولید محتوا</div>
+                    <div class="management-name">AmirUx</div>
+                    <span class="management-badge">مدیر رسانه</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- فوتر -->
     <footer>
-        <p>🐉 <span>DRAGON ROLEPLAY</span> | تمامی حقوق محفوظ است © 2026</p>
-        <p style="font-size: 18px; margin-top: 20px;">طراحی شده توسط <span>@Mashin_Mazndarn</span></p>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>آیپی سرور</h4>
+                <!-- آیپی به صورت رنک و با قابلیت کپی -->
+                <div class="footer-ip-card" onclick="copyIP()">
+                    <i class="fas fa-network-wired"></i>
+                    <div class="footer-ip-text">5.57.34.6:7777</div>
+                    <div class="footer-ip-label">برای کپی کلیک کنید</div>
+                </div>
+                
+                <h4 style="margin-top: 30px;">درباره ما</h4>
+                <p style="color: #a0a0a0; line-height: 1.8;">برترین سرور سمپ با نام Eternity، میزبان بیش از 50 بازیکن فعال روزانه</p>
+                <div style="margin-top: 20px;">
+                    <i class="fas fa-map-pin" style="color: #fbbf24;"></i>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>لینک‌های سریع</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">خانه</a></li>
+                    <li><a href="#gallery">گالری</a></li>
+                    <li><a href="#features">ویژگی‌ها</a></li>
+                    <li><a href="#about">درباره سرور</a></li>
+                    <li><a href="#management">مدیریت</a></li>
+                    <!-- لینک قوانین در فوتر -->
+                    <li><a href="https://ttaahhaa1123456789-sketch.github.io/Gvanin-Eternity-/" target="_blank">📜 قوانین</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>ارتباط با ما</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i 
+                    <li><a href="https://t.me/Eternity_Role_Play" target="_blank"><i class="fab fa-telegram"></i> تلگرام</a></li>
+                    <li><a href="#"><i> 
+                    <li><a href="https://rubika.ir/@DraGon_RolePlay" target="_blank"><i class="fas fa-paper-plane"></i> روبیکا</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>تمامی حقوق برای سرور Eternity محفوظ است © 2025</p>
+        </div>
     </footer>
 
-    <!-- ===== SCRIPTS ===== -->
+    <!-- دکمه بازگشت به بالا -->
+    <div class="go-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- اسکریپت‌ها -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // ===== PRELOADER =====
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(function() {
-                    document.getElementById('preloader').style.display = 'none';
-                }, 500);
-            }, 1000);
+        // راه‌اندازی AOS
+        AOS.init({
+            duration: 1000,
+            once: true
         });
 
-        // ===== HAMBURGER MENU =====
-        const menuToggle = document.getElementById('menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navLinks.classList.toggle('show');
-        });
-
-        document.querySelectorAll('.navbar a').forEach(link => {
-            link.addEventListener('click', function() {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('show');
-            });
-        });
-
-        // ===== TYPING EFFECT =====
-        const text = "به نسل بعدی گیمینگ خوش آمدید";
-        let i = 0;
-        const typingElement = document.getElementById('typing');
-
-        function typeWriter() {
-            if (i < text.length) {
-                typingElement.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 80);
-            }
-        }
-        typeWriter();
-
-        // ===== GALLERY SLIDER =====
-        const sliderImages = [
-            "https://uploadkon.ir/uploads/418017_26IMG-20250907-151918-804.png",
-            "https://uploadkon.ir/uploads/028415_26IMG-20251104-140619-038.jpg",
-            "https://uploadkon.ir/uploads/91c615_26IMG-20251104-140622-920.jpg",
-            "https://uploadkon.ir/uploads/bd6a16_26InShot-20260213-234136209.jpg"
-        ];
-
-        let sliderIndex = 0;
-        const sliderImg = document.getElementById('slider-img');
-        const dotsContainer = document.getElementById('gallery-dots');
-
-        sliderImages.forEach((_, index) => {
-            const dot = document.createElement('span');
-            dot.className = 'dot' + (index === 0 ? ' active' : '');
-            dot.addEventListener('click', () => {
-                sliderIndex = index;
-                updateSlider();
-            });
-            dotsContainer.appendChild(dot);
-        });
-
-        function updateSlider() {
-            sliderImg.style.opacity = '0';
-            setTimeout(() => {
-                sliderImg.src = sliderImages[sliderIndex];
-                sliderImg.style.opacity = '1';
-                
-                document.querySelectorAll('.dot').forEach((dot, idx) => {
-                    dot.classList.toggle('active', idx === sliderIndex);
-                });
-            }, 500);
-        }
-
-        setInterval(() => {
-            sliderIndex = (sliderIndex + 1) % sliderImages.length;
-            updateSlider();
-        }, 5000);
-
-        // ===== LIGHTBOX =====
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
-
-        sliderImg.addEventListener('click', () => {
-            lightboxImg.src = sliderImg.src;
-            lightbox.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-
-        lightbox.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        });
-
-        // ===== COPY IP =====
+        // کپی آیپی
         function copyIP() {
-            const ip = document.getElementById('ip-text').innerText;
+            const ip = "185.14.30.50:7777";
             navigator.clipboard.writeText(ip).then(() => {
-                const msg = document.getElementById('copy-msg');
-                msg.style.opacity = '1';
+                // ایجاد نوتیفیکیشن
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: linear-gradient(135deg, #fbbf24, #dc2626);
+                    color: #0a0c0f;
+                    padding: 15px 30px;
+                    border-radius: 50px;
+                    font-weight: 700;
+                    z-index: 9999;
+                    animation: slideDown 0.3s ease;
+                    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.5);
+                `;
+                notification.textContent = '✅ آیپی با موفقیت کپی شد!';
+                document.body.appendChild(notification);
+                
                 setTimeout(() => {
-                    msg.style.opacity = '0';
+                    notification.remove();
                 }, 2000);
             });
         }
 
-        // ===== CLOSE MENU ON OUTSIDE CLICK =====
-        document.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
-                menuToggle.classList.remove('active');
-                navLinks.classList.remove('show');
+        // اسکرول به بالا
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // نمایش/مخفی کردن دکمه بازگشت به بالا
+        window.addEventListener('scroll', () => {
+            const goTop = document.querySelector('.go-top');
+            if (window.scrollY > 500) {
+                goTop.classList.add('show');
+            } else {
+                goTop.classList.remove('show');
+            }
+
+            // تغییر استایل نوار ناوبری هنگام اسکرول
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
         });
-    </script>
-</body>
-</html>
+
+        // هایلایت لینک فعال
+        const sections = document.querySelectorAll('section');
+        const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            mobileLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // منوی همبرگری
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const hamburgerIcon = document.getElementById('hamburgerIcon');
+            
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            hamburgerIcon.classList.toggle('active');
+        }
+
+        // بستن منو با کلیک روی لینک
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+
+        // گالری تصاویر
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.gallery-slide');
+        const slider = document.getElementById('gallerySlider');
+        const dotsContainer = document.getElementById('galleryDots');
+        let autoSlideInterval;
+
+        // ایجاد دکمه‌های پایین اسلایدر
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('gallery-dot');
+            dot.onclick = () => goToSlide(index);
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.gallery-dot
